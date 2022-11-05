@@ -63,6 +63,7 @@ INSERT INTO reviews(series_id, reviewer_id, rating) VALUES
     (13,3,8.0),(13,4,7.2),
     (14,2,8.5),(14,3,8.9),(14,4,8.9);
 
+-- Query 1 --------------------------------
 SELECT title, rating 
 FROM series, reviews
 WHERE series.id = reviews.series_id;
@@ -72,6 +73,7 @@ FROM series
 JOIN reviews
     ON series.id = reviews.series_id;
 
+-- Query 2 --------------------------------
 SELECT title, AVG(rating) AS avg_rate
 FROM series 
 JOIN reviews 
@@ -79,29 +81,34 @@ JOIN reviews
 GROUP BY title
 ORDER BY avg_rate;
 
+-- Query 3 --------------------------------
 SELECT first_name, last_name, rating
 FROM reviewers 
 JOIN reviews 
     ON reviewers.id = reviews.series_id;
 
+-- Query 4 --------------------------------
 SELECT *
 FROM series
 LEFT JOIN reviews
     ON series.id = reviews.series_id
 WHERE rating IS NULL;
 
+-- Query 5 --------------------------------
 SELECT title AS unreviewed_series
 FROM series
 LEFT JOIN reviews
     ON series.id = reviews.series_id
 WHERE rating IS NULL;
 
+-- Query 6 --------------------------------
 SELECT genre, ROUND(AVG(rating), 2) AS avg_rating
 FROM series 
 INNER JOIN reviews 
     ON series.id = reviews.series_id
 GROUP BY genre;
 
+-- Query 6 고급 쿼리-------------------------------
 SELECT first_name, 
        last_name, 
        Count(rating)                               AS COUNT, 
@@ -114,6 +121,7 @@ FROM   reviewers
               ON reviewers.id = reviews.reviewer_id 
 GROUP  BY reviewers.id; 
 
+-- Query 7 고급 쿼리-------------------------------
 SELECT first_name, 
        last_name, 
        Count(rating)                    AS COUNT, 
@@ -130,6 +138,7 @@ FROM   reviewers
               ON reviewers.id = reviews.reviewer_id 
 GROUP  BY reviewers.id; 
 
+-- Query 8 고급 쿼리-------------------------------
 SELECT 
     title,
     rating,
